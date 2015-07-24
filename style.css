@@ -1,0 +1,207 @@
+body{
+  background-color:#FFFFFF;
+}
+#container{
+  width: 100%;
+  height: 220px;
+  position: sticky;
+}
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: #2DE7B5;
+  position: relative
+  float: left;
+  margin: 5px 5px 5px 5px;
+  display: inline-block;
+}
+@-webkit-keyframes bomb {
+  0%{
+    width: 200px;
+    height: 200px;
+    background-color: 2DE7B5;
+  }
+  50%{
+    width: 100%;
+    height: 100%;
+    font-size: 750px;
+  }
+  90%{
+    background-color: #B00000;
+    opacity: 1;
+  }
+  91%{
+    background-color: #FFFFFF;
+    opacity: 0;
+  }
+  92%{
+    background-color: #C00000;
+    opacity: 1;
+  }
+  93%{
+    background-color: #FFFFFF;
+    opacity: 0;
+  }
+  94%{
+    background-color: #D00000;
+    opacity: 1;
+  }
+  95%{
+    background-color: #FFFFFF;
+    opacity: 0;
+  }
+  96%{
+    background-color: #E00000;
+    opacity: 1;
+  }
+  97%{
+    background-color: #FFFFFF;
+    opacity: 0;
+  }
+  98%{
+    background-color: #F00000;
+    opacity: 1;
+  }
+  99%{
+    background-color: #FFFFFF;
+    opacity: 0;
+  }
+  100%{
+    background-color: #FF0000;
+    width: 100%;
+    height: 100%;
+    font-size: 750px;
+  }
+}
+.boxChoosed{
+
+  font-family: Ubuntu,sans-serif;
+  background-color: #2DE7B5;
+  background-repeat: no-repeat;
+
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  float: left;
+  margin: 0px 0px 0px 0px;
+  animation-name: bomb;
+  animation-duration: 5s;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+
+
+}
+.boxChoosedNoAni{
+  font-family: Ubuntu,sans-serif;
+  background-color: #2DE7B5;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  float: left;
+  width: 50px;
+  height: 50px;
+  font: 20px;
+}
+#choosed{
+  position: relative;
+}
+#floor{
+  width: 200px;
+  height: 100px;
+  background-color: #EFA0A2;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+
+#button{
+  width: 200px;
+  height: 100px;
+  background-color: #EFA0A2;
+  left: 0px;
+  top: 0px;
+  position: relative;
+}
+@-webkit-keyframes moveDown {
+    0%   {
+      margin: auto;
+      left:auto;
+      top: auto;
+      opacity: 0;
+      -webkit-animation-timing-function: ease;
+    }
+    5%  {
+      left:0px;
+      top: 250px;
+      opacity: 1;
+      -webkit-animation-timing-function: ease;
+    }
+    15%  {
+      left:0px;
+      top: 200px;
+      opacity: 1;
+      -webkit-animation-timing-function: ease;
+    }
+    40%  {
+      left:0px;
+      top: 250px;
+      opacity: 1;
+      -webkit-animation-timing-function: ease;
+      display: none;
+    }
+    100%  {
+      left:0px;
+      top: 400px;
+      opacity: 0;
+      -webkit-animation-timing-function: linear;
+
+    }
+}
+
+.left{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  font-size: 100;
+  font-style: normal;
+  color: #000000;
+  text-align: center;
+  vertical-align: middle;
+  background-color: blue;
+  animation-name: moveDown;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@-webkit-keyframes testAni {
+  0%{
+    top: 0px;
+  }
+  100%{
+    top: 100px;
+  }
+}
+@-webkit-keyframes stopAni {
+
+}
+.test{
+  animation-name: testAni;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+.stop{
+}
+#containerSke12{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  font-size: 100;
+  font-style: normal;
+  color: #000000;
+  text-align: center;
+  vertical-align: middle;
+  background-color: blue;
+}

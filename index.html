@@ -1,0 +1,120 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+  <script type="text/javascript">
+  var ske12 = [];
+  var ske13 = [];
+  var ske12Choosed = [];
+  var ske13Choosed = [];
+  console.log(ske13);
+  console.log(ske12);
+  for(var i =0;i<10;i++){
+    var nDiv = document.createElement('div');
+    nDiv.id = 'ske12-'+i;
+    nDiv.className= 'left';
+    nDiv.innerHTML = i;
+    ske12.push(nDiv);
+  }
+  </script>
+  <div id="container">
+    <!-- <div class="left">
+    </div> -->
+  </div>
+  <div id="floor"></div>
+  <script type="text/javascript">
+    var i =0;
+    var ske12LoopNumber = 5 ;
+
+    function shuffle(array) {
+      var m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      return array;
+    }
+
+    function shuffleSke12(){
+      shuffle(ske12);
+    }
+
+    function turn12(){
+      setTimeout(function(){
+        shuffleSke12();
+        if(ske12.length>0){
+          var nDiv = ske12[Math.floor(Math.random()*ske12.length)];
+          // console.log("+++++++++++");
+          // console.log(nDiv);
+          // console.log(ske12);
+          // console.log("+++++++++++")
+          document.getElementById('container').appendChild(nDiv);
+          nDiv.style.display='block';
+          nDiv.style.animationDuration=i+1+'s';
+          // console.log(nDiv.style.animationDuration);
+          // console.log(ske12Choosed);
+          if(i<ske12LoopNumber){
+            turn12();
+          }
+          i++;
+          if(i==ske12LoopNumber+1){
+            setTimeout(function(){
+              nDiv.style.webkitAnimationPlayState = 'paused';
+              ske12Choosed.push(nDiv);
+            },(i/2.5)*1000);
+                  }
+          else{
+            setTimeout(function(){
+              nDiv.style.display='none';
+              nDiv.remove();
+            },(i)*1000);
+          }
+        }
+      },(i+1)*1000+1);
+    }
+    function shuffle(array) {
+      var m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      return array;
+    }
+    function chooseSke12(){
+      i = 0;
+      turn12();
+      if(ske12Choosed.length>0){
+        ske12Choosed[ske12Choosed.length-1].remove();
+        // for(var j =0;i<ske12.length;i++){
+          //  if(ske12[j]==ske12Choosed[ske12Choosed.length-1]){
+          if(ske12Choosed.length>0){
+            ske12.splice(ske12.indexOf(ske12Choosed[ske12Choosed.length-1]),1);
+
+        }
+      }
+    }
+    // insertDiv();
+  </script>
+  <button type="button" name="button" onclick="chooseSke12()">Click</button>
+</body>
+</html>

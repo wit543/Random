@@ -1,0 +1,70 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+  <div id="container">
+    <div id='containerSke12' class= 'stop'>
+    </div>
+  </div>
+  <script type="text/javascript">
+  var container = document.getElementById('containerSke12');
+  container.addEventListener('webkitAnimationEnd',function(){
+    this.style.webkitAnimationName = '';
+  });
+  var ske12 = [];
+  // for(var i =0;i<10;i++){
+  //   var nDiv = document.createElement('div');
+  //   nDiv.id = 'ske12-'+i;
+  //   nDiv.className= 'top';
+  //   nDiv.style.position = 'relative';
+  //   nDiv.style.height = '100px';
+  //   nDiv.style.width = '100px';
+  //   nDiv.style.textAlign = 'center';
+  //   nDiv.style.backgroundColor='blue';
+  //   nDiv.style.fontSize = '100';
+  //   nDiv.style.animationDuration=1;
+  //   nDiv.innerHTML = i;
+  //   ske12.push(nDiv);
+  //   document.getElementById('ske12Container').appendChild(nDiv);
+  // }
+  </script>
+  <script type="text/javascript">
+  function animation12(time){
+    var div = document.getElementById('containerSke12');
+    div.className = 'test';
+    div.style.animationName = 'testAni';
+    div.style.webkitAnimationPlayState = 'running';
+    div.style.animationDuration = time+'s';
+    div.style.animationIterationCount = '1';
+    // setTimeout(function(){
+    //   ske12[ske12.length-1].parentNode.insertBefore(ske12[ske12.length-1],ske12[ske12.length-1].parentNode.firstChild);
+    //   var temp = ske12.pop();
+    //   ske12.unshift(temp);
+    //   console.log(ske12);
+    //   //div.className = 'test';
+    //   // setTimeout(function(){
+    //   //   div.style.webkitAnimationPlayState = 'paused';
+    //   // },0);
+    // },time*1000);
+  }
+  function startSke12(){
+    //for(var i =1;i<5;i++){
+      animation12(1);
+    // }
+  }
+  function stopSke12(){
+    var div = document.getElementById('ske12Container');
+
+    div.style.webkitAnimationPlayState = 'paused';
+  }
+  </script>
+  <div id="floor">
+  <button type="button" name="start" onclick="startSke12()">Start</button>
+  <button type="button" name="stop" onclick="stopSke12()">Stop</button>
+
+  </div>
+  </body>
+</html>

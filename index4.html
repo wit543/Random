@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  <head>
+  <body>
+    <div id='container'>
+    </div>
+    <script type="text/javascript">
+
+    function shuffle(array) {
+      var m = array.length, t, i;
+
+      // While there remain elements to shuffle…
+      while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+
+      return array;
+    }
+    function initDiv(){
+      this.style.color = "#000000";
+      this.className= 'boxChoosed';
+      // this.style.fontSize = '700px';
+      // this.style.lineHeight = '550px';
+      this.innerHTML = this.id.substring(6);
+      this.style.backgroundImage = "url('images/ske13/"+this.id.substring(6)+".jpg')";
+      var self = this;
+      setTimeout(function(){
+        self.parentElement.removeChild(self);
+        choosed.push(self);
+        self.className = 'boxChoosedNoAni';
+        document.getElementById('choosed').appendChild(self);
+        array.splice(array.indexOf(self),1);
+        reset();
+      },5000);
+    }
+    function NextPerson() {
+
+    }
+    var array = [];
+    var choosed = [];
+    var numberOfDivThatCanBeChoose = 8;
+    for(var i= 0;i<8;i++){
+        var nDiv = document.createElement('div');
+        nDiv.id = 'ske12-'+i;
+        nDiv.className= 'box';
+        nDiv.style.fontSize = '100px';
+        // nDiv.style.color = '#2DE7B5';
+        nDiv.style.color = '#000000';
+        nDiv.innerHTML = i;
+        nDiv.style.textAlign = 'center';
+        nDiv.addEventListener('click',initDiv);
+        array.push(nDiv);
+      }
+      var container = document.getElementById('container');
+      function display(){
+        reset();
+        if(array.length>numberOfDivThatCanBeChoose){
+          for(var i =0;i<numberOfDivThatCanBeChoose;i++){
+            container.appendChild(array[i]);
+          }
+        }
+        else{
+          for(var i =0;i<array.length;i++){
+            container.appendChild(array[i]);
+          }
+        }
+      }
+      function reset(){
+
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+      }
+      function newSet(){
+        shuffle(array);
+        display();
+      }
+    </script>
+    <button type="button" name="button" onclick="newSet()">Click</button>
+    <div id='choosed'>
+    </div>
+  </body>
+</hrml>
