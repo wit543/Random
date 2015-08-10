@@ -1,8 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
   <head>
   <body>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <div id='container'>
     </div>
     <script type="text/javascript">
@@ -25,8 +31,16 @@
       return array;
     }
     function initDiv(){
+      // console.log(container.childNodes[i]);
+      var temp = this;
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      container.appendChild(temp);
       this.style.color = "#000000";
       this.className= 'boxChoosed';
+      this.style.left = (screen.width/2)+"px";
+      console.log(screen.width);
       // this.style.fontSize = '700px';
       // this.style.lineHeight = '550px';
       this.innerHTML = this.id.substring(6);
@@ -36,55 +50,85 @@
         self.parentElement.removeChild(self);
         choosed.push(self);
         self.className = 'boxChoosedNoAni';
-        document.getElementById('choosed').appendChild(self);
+        // document.getElementById('choosed').appendChild(self);
         array.splice(array.indexOf(self),1);
         reset();
+        shuffle(arrayNext);
+        display(arrayNext);
       },5000);
     }
-    function NextPerson() {
-
+    function initDivNext(){
+      this.style.color = "#000000";
+      this.className= 'boxChoosed';
+      this.style.left = (screen.width/2)+"px";
+      // this.style.fontSize = '700px';
+      // this.style.lineHeight = '550px';
+      this.innerHTML = this.id.substring(6);
+      this.style.backgroundImage = "url('images/ske13/"+this.id.substring(6)+".jpg')";
+      var self = this;
+      setTimeout(function(){
+        self.parentElement.removeChild(self);
+        choosed.push(self);
+        self.className = 'boxChoosedNoAni';
+        // document.getElementById('choosed').appendChild(self);
+        array.splice(array.indexOf(self),1);
+        reset();
+        shuffle(array);
+        display(array);
+      },5000);
+    }
+    function createDiv(i,array,idName,className,onClick) {
+      var nDiv = document.createElement('div');
+      nDiv.id = idName+'-'+i;
+      nDiv.className= className;
+      nDiv.style.fontSize = '100px';
+      // nDiv.style.color = '#2DE7B5';
+      nDiv.style.color = '#000000';
+      // nDiv.style.backgroundImage = "url('images/questionMark.png')";
+      nDiv.innerHTML = "";
+      nDiv.style.textAlign = 'center';
+      nDiv.addEventListener('click',onClick);
+      array.push(nDiv);
     }
     var array = [];
+    var arrayNext = [];
     var choosed = [];
-    var numberOfDivThatCanBeChoose = 8;
+    var choosedNext = [];
+    var numberOfDivThatCanBeChoose = 3;
     for(var i= 0;i<8;i++){
-        var nDiv = document.createElement('div');
-        nDiv.id = 'ske12-'+i;
-        nDiv.className= 'box';
-        nDiv.style.fontSize = '100px';
-        // nDiv.style.color = '#2DE7B5';
-        nDiv.style.color = '#000000';
-        nDiv.innerHTML = i;
-        nDiv.style.textAlign = 'center';
-        nDiv.addEventListener('click',initDiv);
-        array.push(nDiv);
-      }
-      var container = document.getElementById('container');
-      function display(){
-        reset();
-        if(array.length>numberOfDivThatCanBeChoose){
-          for(var i =0;i<numberOfDivThatCanBeChoose;i++){
-            container.appendChild(array[i]);
-          }
-        }
-        else{
-          for(var i =0;i<array.length;i++){
-            container.appendChild(array[i]);
-          }
+      createDiv(i,array,'ske12','box img-rounded',initDiv);
+      createDiv(i,arrayNext,'ske13','boxNext',initDivNext);
+    }
+    var container = document.getElementById('container');
+    function display(array){
+      reset();
+      if(array.length>numberOfDivThatCanBeChoose){
+        for(var i =0;i<numberOfDivThatCanBeChoose;i++){
+          container.appendChild(array[i]);
         }
       }
-      function reset(){
+      else{
+        for(var i =0;i<array.length;i++){
+          container.appendChild(array[i]);
+        }
+      }
+    }
+    function reset(){
 
-        while (container.firstChild) {
-          container.removeChild(container.firstChild);
-        }
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
       }
-      function newSet(){
-        shuffle(array);
-        display();
-      }
+    }
+    function newSet(){
+      shuffle(array);
+      display(array);
+    }
     </script>
-    <button type="button" name="button" onclick="newSet()">Click</button>
+    <button type="button" id="GET" name="button" onclick="newSet()" class="btn btn-lg btn-primary" style="
+    bottom: 50px;
+    right: 50px;
+    position: absolute;
+    ">Click</button>
     <div id='choosed'>
     </div>
   </body>
