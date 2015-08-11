@@ -310,3 +310,9 @@ body{
   vertical-align: middle;
   background-color: blue;
 }
+.cardContainner{
+  width: 600px;
+  height: 800px;
+  left: 100px;
+  top: 100px;
+}
