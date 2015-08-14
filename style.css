@@ -14,13 +14,19 @@ body{
   margin-left: -45%;*/
 }
 .boxNext{
-  width: 200px;
-  height: 200px;
-  background-color: #FFAF27;
-  position: relative
+  width: 33.33333333333%;
+  height: 90%;
+  background-color: #E91E63;
+  background-image: url('images/next.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  position: relative;
   float: left;
-  margin: 5px 5px 5px 5px;
+  margin: px 0px 0px 0px;
   display: inline-block;
+  border-style: solid;
+  border-width: 5px;
 }
 .box{
   width: 33.33333333333%;
