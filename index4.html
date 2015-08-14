@@ -10,6 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <div id='container'>
+      <div class='row'>
+        <!-- <div class='col-md-4'>
+
+        </div>
+        <div class='col-md-4'></div>
+        <div class='col-md-4'></div> -->
+      </div>
+
     </div>
     <script type="text/javascript">
 
@@ -39,7 +47,7 @@
       container.appendChild(temp);
       this.style.color = "#000000";
       this.className= 'boxChoosed';
-      this.style.left = (screen.width/2)+"px";
+      // this.style.left = (screen.width/2)+"px";
       console.log(screen.width);
       // this.style.fontSize = '700px';
       // this.style.lineHeight = '550px';
@@ -95,8 +103,8 @@
     var choosed = [];
     var choosedNext = [];
     var numberOfDivThatCanBeChoose = 3;
-    for(var i= 0;i<8;i++){
-      createDiv(i,array,'ske12','box img-rounded',initDiv);
+    for(var i= 0;i<10;i++){
+      createDiv(i,array,'ske12','box img-rounded col-md-4',initDiv);
       createDiv(i,arrayNext,'ske13','boxNext',initDivNext);
     }
     var container = document.getElementById('container');
