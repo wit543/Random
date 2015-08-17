@@ -12,7 +12,12 @@
             }
             100%{
                 transform: rotate(180deg);
+                transition: 6s;
             }
+        }
+        .flip .flipper{
+            transform: rotateY(180deg);
+            transition: 0.6s;
         }
         body {
             color: white;
@@ -37,12 +42,12 @@
             position: relative;
             background-color: aqua;        }
         /* flip the pane when hovered */
-        .flip-container:active  .flipper, .flip-container.hover .flipper {
+        /*.flip-container:active  .flipper{
             transform: rotateY(180deg);
-        }
+        }*/
         .flip-container, flipper, .front, .back {
             width: 100%;
-            height: 300PX;
+            height: 300px;
             border-radius: 8px;
         }
         /* flip speed goes here */
@@ -96,13 +101,13 @@
         </div>
         <div class="row people-row">
             <div class="col-lg-4 col-xs-4">
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front">
-                            <!--front content -->
+                <div id="card-container-1" class="flip-container">
+                    <div id="card-flipper-1" class="flipper">
+                        <div id="card-front-1" class="front">
+                  			<!-- front content -->
                   			A
   		                </div>
-  		                <div class="back">
+  		                <div id="card-back-1" class="back">
   		                	<!-- back content -->
   		                	AA
   	                	</div>
@@ -110,13 +115,13 @@
                 </div>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front">
+                <div id="card-container-2" class="flip-container">
+                    <div id="card-flipper-2" class="flipper">
+                        <div id="card-front-2" class="front">
                   			<!-- front content -->
                   			B
   		                </div>
-  		                <div class="back">
+  		                <div id="card-back-2" class="back">
   		                	<!-- back content -->
   		                	BB
   	                	</div>
@@ -124,16 +129,16 @@
                 </div>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front">
-                  			<!-- front content -->
-                  			C
-  		                </div>
-  		                <div class="back">
-  		                	<!-- back content -->
-  		                	CC
-  	                	</div>
+                <div id="card-container-3" class="flip-container">
+                    <div id="card-flipper-3" class="flipper">
+                        <div id="card-front-3" class="front">
+                            <!--front content -->
+                        C
+                      </div>
+                      <div id="card-back-3" class="back">
+                        <!-- back content -->
+                        CC
+                      </div>
                     </div>
                 </div>
             </div>
@@ -143,18 +148,26 @@
     <script type="text/javascript">
         "use strict";
 
-        var state = true;
-        $(".btn").click(function() {
-            console.log('wtf');
-//            $(".flip-container").hide();
-            if (state) {
-                $(".flip-container").addClass("animated flip");
-            } else {
-                $(".flip-container").removeClass("animated flip");
+//        var state = true;
+//        $(".btn").click(function() {
+//            if (state) {
+//                $(".flip-container").addClass("flip");
+//                $(".flipper").addClass("flip");
+//            } else {
+//                $(".flip    container").removeClass("flip");
+//            }
+//            state = !state;
+//        });
+        var initDiv = function(selector){
+            var tempDiv = $(selector);
+            tempDiv.click(function(){
+                tempDiv.addClass("flip");
+            });
+        };
+        $(document).ready(function() {
+            for (var i = 1; i <= 3; i++) {
+                initDiv("#card-container-" + i);
             }
-            state = !state;
-//            $(".flip-container").hide();
-//            $(".flip-container").removeClass("animated flip");
         });
     </script>
 </body>
