@@ -28,7 +28,9 @@
             padding-bottom: 66%;
         }
         .people-holder {
+            position: absolute;
             text-align: center;
+            z-index: 2;
         }
         .black-text {
             color: #444444;
@@ -78,7 +80,7 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
         "use strict";
-        
+
         var state = true;
         $(".btn").click(function() {
             console.log('wtf');
