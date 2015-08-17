@@ -172,8 +172,12 @@
 //            }
 //            state = !state;
 //        });
+        var SKE12 = 1;
+        var SKE13 = 0;
+        var state = SKE12;
+        var currentSke13;
         var ske12Array = ["1","2","3","4","5"];
-        var ske13Array =["1"];
+        var ske13Array =["01","02","03","04","05"];
         var ske12 = {
             code: ske12Array,
         };
@@ -185,19 +189,36 @@
         };
         var setSke13Card = function(){
             for(var i =1;i<=3;i++){
-                $("#card-back-"+i).text(ske13[i]);
+                if(ske13Array.length==0){
+                    $("#card-back-"+i).text("END");
+                }
+                else if(ske13Array.length<3){
+                    $("#card-back-"+i).text(ske13Array[(i-1)%ske13Array.length]);
+                }
+                else{
+                    $("#card-back-"+i).text(ske13Array[i-1]);
+                }
+                
             }
         };
         var setSke12Card = function(){
             for(var i =1;i<=3;i++){
-                $("#card-back-"+i).text(ske12[i]);
+                if(ske12Array.length==0){
+                    $("#card-back-"+i).text("END");
+                }
+                else if(ske12Array.length<3){
+                    $("#card-back-"+i).text(ske12Array[(i-1)%ske12Array.length]);
+                }
+                else{
+                    $("#card-back-"+i).text(ske12Array[i-1]);
+                }
             }
         };
         var shuffleSke12 = function(){
-            shuffle(ske12);
+            shuffle(ske12Array);
         };
         var shuffleSke13 = function(){
-            shuffle(ske13);
+            shuffle(ske13Array);
         };
         var saveToFile = function(){
             localStorage.setItem('choosed', JSON.stringify(ske13Choosed));
@@ -205,11 +226,22 @@
         };
         var setClickListener = function(selector){
             var tempDiv = $(selector);
-            console.log(selector);
             tempDiv.bind("click", function(){
                 tempDiv.addClass("flip");
-                console.log(tempDiv);
-                console.log(tempDiv.click);
+//                console.log();
+                var text = tempDiv.children().children(".back").text();
+                if(state == SKE12){
+                    currentSke13 =text;
+                    console.log(ske13Array);
+                    console.log(ske13Array.indexOf(text));
+                    ske13Array.splice(ske13Array.indexOf(text),1);
+                    console.log(ske13Array);
+                }
+                if(state == SKE13){
+                    ske13Choosed[currentSke13] = text;
+                    ske12Array.splice(ske12Array.indexOf(text),1);
+                    console.log(ske13Choosed);
+                }
                 unbindAll();
             });
         };
@@ -220,8 +252,6 @@
         };
         var resetCss = function(){
             for(var i=1;i<=3;i++){
-//                $("#card-flipper-"+i).css("transform","rotateY(0deg)");
-//                $("#card-flipper-"+i).css("transform","rotateY(0deg)");
                 $("#card-container-"+i).removeClass("flip");
             }
         };
@@ -233,10 +263,27 @@
         $("#button").bind("click",function(){
             resetCss();
             resetClick();
+            setTimeout(function(){
+                if(state == SKE12){
+                    console.log("in ske12");
+                    shuffleSke12();
+                    setSke12Card();
+                }
+                else{
+                    console.log("in ske13");
+                    shuffleSke13();
+                    setSke13Card();
+            }
+            state == SKE12 ? state = SKE13 : state = SKE12;
+            },500);
+            console.log(state);
         });
         $(document).ready(function() {
+            shuffleSke12();
+            shuffleSke13();
             resetCss();
             resetClick();
+            setSke13Card();
         });
     </script>
 </body>
