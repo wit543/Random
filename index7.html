@@ -21,8 +21,9 @@
             transform-style: preserve-3d;
 /*            float: inherit;*/
         }
-        .scale .flipper{
-            transform: scale(1.5,1.5);
+        .scale{
+            transform: scale(1.1);
+            transition-duration: 1s;
         }
         body {
             color: white;
@@ -47,10 +48,12 @@
         /*.flip-container:active  .flipper{
             transform: rotateY(180deg);
         }*/
+/*
         .flip-container:hover{
-            transform: scale(1.5);
+            transform: scale(1.1);
             transition-duration: 1s;
         }
+*/
         .flip-container, flipper, .front, .back {
             width: 100%;
             height: 300px;
@@ -238,34 +241,58 @@
             var tempDiv = $(selector);
             tempDiv.bind("click", function(){
                 tempDiv.addClass("flip");
-                
+                tempDiv.addClass("scale");
 //                console.log();
                 var text = tempDiv.children().children(".back").text();
                 if(state == SKE12){
                     currentSke13 =text;
-                    console.log(ske13Array);
-                    console.log(ske13Array.indexOf(text));
+//                    console.log(ske13Array);
+//                    console.log(ske13Array.indexOf(text));
                     ske13Array.splice(ske13Array.indexOf(text),1);
                     console.log(ske13Array);
                 }
                 if(state == SKE13){
                     ske13Choosed[currentSke13] = text;
                     ske12Array.splice(ske12Array.indexOf(text),1);
-                    console.log(ske13Choosed);
+//                    console.log(ske13Choosed);
                     saveToFile();
                 }
-                unbindAll();
+                for(var i = 1;i<=3;i++){
+                    if(i!=tempDiv.selector.substring(16)){
+                        $("#card-container-"+i).unbind("mouseenter");
+                        console.log(i);
+                    }
+                   
+                }
+                unbindCickAll();
+                tempDiv.unbind("mouseleave");
                 choosed = true;
             });
+            tempDiv.bind("mouseenter",function(){
+                tempDiv.css("transform", "scale(1.1)");
+                tempDiv.css("transition-duration","1s");
+            });
+            tempDiv.bind("mouseleave",function(){
+                tempDiv.css("transform", "scale(1)");
+                tempDiv.css("transition-duration","1s");
+            });
         };
-        var unbindAll = function(){
-                for(var i = 1;i<=3;i++){
-                    $("#card-container-"+i).unbind("click");
-                }
+        var unbindCickAll = function(){
+            for(var i = 1;i<=3;i++){
+                $("#card-container-"+i).unbind("click");
+            }
         };
+//        var resetHover = function(){
+//            for(var i = 1;i<=3;i++){
+//                   $("#card-container-"+i).unbind("click");
+//            }
+//        };
         var resetCss = function(){
             for(var i=1;i<=3;i++){
                 $("#card-container-"+i).removeClass("flip");
+                $("#card-container-"+i).removeClass("scale");
+                $("#card-container-"+i).css("transform","scale(1)");
+                $("#card-container-"+i).css("transition-duration","1s");
             }
         };
         var resetClick = function(){
