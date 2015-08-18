@@ -18,6 +18,10 @@
         .flip .flipper{
             transform: rotateY(180deg);
             transition: 0.6s;
+/*            float: inherit;*/
+        }
+        .scale .flipper{
+            transform: scale(1.5,1.5);
         }
         body {
             color: white;
@@ -32,9 +36,6 @@
         }
         .people-row {
             margin-bottom: 15px;
-        }
-        .col-lg-4{
-            height: 300px;
         }
         /* entire container, keeps perspective */
         .flip-container {
@@ -60,7 +61,7 @@
         /* hide back of pane during swap */
         .front, .back {
             backface-visibility: hidden;
-
+            text-align: center;
             position: absolute;
             top: 0;
             left: 0;
@@ -71,12 +72,15 @@
             /* for firefox 31 */
             transform: rotateY(0deg);
             background-color: #000;
+            font-size: 200px;
         }
         /* back, initially hidden pane */
         .back {
             z-index: 2;
             transform: rotateY(180deg);
             background-color: #F0F;
+            padding: 30%;
+            font-size: 100px;
         }
         .black-text {
             color: #444444;
@@ -176,6 +180,7 @@
         var SKE13 = 0;
         var state = SKE12;
         var currentSke13;
+        var choosed = false;
         var ske12Array = ["1","2","3","4","5"];
         var ske13Array =["01","02","03","04","05"];
         var ske12 = {
@@ -228,6 +233,7 @@
             var tempDiv = $(selector);
             tempDiv.bind("click", function(){
                 tempDiv.addClass("flip");
+                
 //                console.log();
                 var text = tempDiv.children().children(".back").text();
                 if(state == SKE12){
@@ -241,8 +247,10 @@
                     ske13Choosed[currentSke13] = text;
                     ske12Array.splice(ske12Array.indexOf(text),1);
                     console.log(ske13Choosed);
+                    saveToFile();
                 }
                 unbindAll();
+                choosed = true;
             });
         };
         var unbindAll = function(){
@@ -261,22 +269,26 @@
             }
         };
         $("#button").bind("click",function(){
-            resetCss();
-            resetClick();
-            setTimeout(function(){
-                if(state == SKE12){
-                    console.log("in ske12");
-                    shuffleSke12();
-                    setSke12Card();
+            if(choosed){
+                resetCss();
+                resetClick();
+                setTimeout(function(){
+                    if(state == SKE12){
+                        console.log("in ske12");
+                        shuffleSke12();
+                        setSke12Card();
+                    }
+                    else{
+                        console.log("in ske13");
+                        shuffleSke13();
+                        setSke13Card();
                 }
-                else{
-                    console.log("in ske13");
-                    shuffleSke13();
-                    setSke13Card();
+                state == SKE12 ? state = SKE13 : state = SKE12;
+                },500);
+                console.log(state);
+                choosed = false;
             }
-            state == SKE12 ? state = SKE13 : state = SKE12;
-            },500);
-            console.log(state);
+           
         });
         $(document).ready(function() {
             shuffleSke12();
