@@ -93,7 +93,7 @@
         .black-text {
             color: #444444;
         }
-        #button {
+        #buttonDiv {
             text-align: right;
             margin-top: 24px;
         }
@@ -104,9 +104,13 @@
         <div class="row">
             <div class="col-xs-6">
                 <h1 class="black-text">PICK ONE</h1>
+                <h1 id="status" class="black-text">ske12</h1>
             </div>
-            <div id="button" class="col-xs-6">
-                <button class="btn btn-primary">Confirm
+            <div id="buttonDiv" class="col-xs-6">
+                <button id="show" class="btn btn-primary">Show
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+                <button id="button" class="btn btn-primary">Confirm
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 </button>
             </div>
@@ -241,7 +245,9 @@
         var setClickListener = function(selector){
             var tempDiv = $(selector);
             tempDiv.bind("click", function(){
-                tempDiv.children().children(".back").css("background-color",backgroundColor[Math.floor(Math.random()*19+1)]);
+                for(var i = 1;i<=3;i++){
+                    $("#card-back-"+i).css("background-color",backgroundColor[Math.floor(Math.random()*19+1)]);
+                }
                 tempDiv.addClass("flip");
                 tempDiv.addClass("scale");
 //                console.log();
@@ -303,6 +309,13 @@
                 setClickListener("#card-container-" + i);
             }
         };
+        $("#show").bind("click",function(){
+            if(choosed){
+                for(var i = 1;i<=3;i++){
+                  $("#card-container-"+i).addClass("flip");
+                }
+            }
+        });
         $("#button").bind("click",function(){
             if(choosed){
                 resetCss();
@@ -322,6 +335,12 @@
                 },500);
                 console.log(state);
                 choosed = false;
+                if(state == SKE12){
+                    $("#status").text("ske13");
+                }
+                else{
+                    $("#status").text("ske12");
+                }
             }
            
         });
