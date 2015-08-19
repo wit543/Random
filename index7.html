@@ -191,6 +191,7 @@
         var choosed = false;
         var ske12Array = ["1","2","3","4","5"];
         var ske13Array =["01","02","03","04","05"];
+        var backgroundColor = ["#F44336","#E91E63","#9C27B0","#673AB7","#673AB7","#3F51B5","#2196F3","#03A9F4","#00BCD4","#009688","#4CAF50","8BC34A","#CDDC39","#FFEB3B","#FFC107","#FF9800","FF5722","#795548","#9E9E9E"];
         var ske12 = {
             code: ske12Array,
         };
@@ -293,6 +294,7 @@
                 $("#card-container-"+i).removeClass("scale");
                 $("#card-container-"+i).css("transform","scale(1)");
                 $("#card-container-"+i).css("transition-duration","1s");
+                $("#card-back-"+i).css("background-color",backgroundColor[Math.floor(Math.random()*19+1)]);
             }
         };
         var resetClick = function(){
