@@ -241,6 +241,7 @@
         var setClickListener = function(selector){
             var tempDiv = $(selector);
             tempDiv.bind("click", function(){
+                tempDiv.children().children(".back").css("background-color",backgroundColor[Math.floor(Math.random()*19+1)]);
                 tempDiv.addClass("flip");
                 tempDiv.addClass("scale");
 //                console.log();
@@ -294,7 +295,7 @@
                 $("#card-container-"+i).removeClass("scale");
                 $("#card-container-"+i).css("transform","scale(1)");
                 $("#card-container-"+i).css("transition-duration","1s");
-                $("#card-back-"+i).css("background-color",backgroundColor[Math.floor(Math.random()*19+1)]);
+                
             }
         };
         var resetClick = function(){
