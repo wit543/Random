@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        @-webkit-keyframes rotate {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(180deg);
+                transition: 6s;
+            }
+        }
+        .flip .flipper{
+            transform: rotateY(180deg);
+            transition: 5s;
+            transform-style: preserve-3d;
+/*            float: inherit;*/
+        }
+        .scale .flipper{
+            transform: scale(1.5,1.5);
+        }
+        body {
+            color: white;
+            background-color: #444444;
+            font-family: "Segoe UI Semibold";
+        }
+        .container {
+            box-shadow: 0px 0px 25px #111111;
+            margin-top: 30px;
+            border-radius: 5px;
+            background-color: whitesmoke;
+        }
+        .people-row {
+            margin-bottom: 15px;
+        }
+        /* entire container, keeps perspective */
+        .flip-container {
+/*            perspective: 1000;*/
+            position: relative;
+            background-color: aqua;        }
+        /* flip the pane when hovered */
+        /*.flip-container:active  .flipper{
+            transform: rotateY(180deg);
+        }*/
+        .flip-container:hover{
+            transform: scale(1.5);
+            transition-duration: 1s;
+        }
+        .flip-container, flipper, .front, .back {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+        }
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            background-color: bisque;
+            position: relative;
+        }
+        /* hide back of pane during swap */
+        .front, .back {
+            backface-visibility: hidden;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        /* front pane, placed above back */
+        .front {
+            z-index: 1;
+            /* for firefox 31 */
+            transform: rotateY(0deg);
+            background-color: #000;
+            font-size: 200px;
+        }
+        /* back, initially hidden pane */
+        .back {
+            z-index: 2;
+            transform: rotateY(180deg);
+            background-color: #F0F;
+            padding: 30%;
+            font-size: 100px;
+        }
+        .black-text {
+            color: #444444;
+        }
+        #button {
+            text-align: right;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <h1 class="black-text">PICK ONE</h1>
+            </div>
+            <div id="button" class="col-xs-6">
+                <button class="btn btn-primary">Confirm
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row people-row">
+            <div class="col-lg-4 col-xs-4">
+                <div id="card-container-1" class="flip-container">
+                    <div id="card-flipper-1" class="flipper">
+                        <div id="card-front-1" class="front">
+                  			<!-- front content -->
+                  			A
+  		                </div>
+  		                <div id="card-back-1" class="back">
+  		                	<!-- back content -->
+  		                	AA
+  	                	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <div id="card-container-2" class="flip-container">
+                    <div id="card-flipper-2" class="flipper">
+                        <div id="card-front-2" class="front">
+                  			<!-- front content -->
+                  			B
+  		                </div>
+  		                <div id="card-back-2" class="back">
+  		                	<!-- back content -->
+  		                	BB
+  	                	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <div id="card-container-3" class="flip-container">
+                    <div id="card-flipper-3" class="flipper">
+                        <div id="card-front-3" class="front">
+                            <!--front content -->
+                        C
+                      </div>
+                      <div id="card-back-3" class="back">
+                        <!-- back content -->
+                        CC
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        "use strict";
+         function shuffle(array) {
+             var m = array.length, t, i;
+             // While there remain elements to shuffle…
+             while (m) {
+                 // Pick a remaining element…
+                 i = Math.floor(Math.random() * m--);
+
+                // And swap it with the current element.
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+             }
+             return  array;
+         }
+
+//        var state = true;
+//        $(".btn").click(function() {
+//            if (state) {
+//                $(".flip-container").addClass("flip");
+//                $(".flipper").addClass("flip");
+//            } else {
+//                $(".flip    container").removeClass("flip");
+//            }
+//            state = !state;
+//        });
+        var SKE12 = 1;
+        var SKE13 = 0;
+        var state = SKE12;
+        var currentSke13;
+        var choosed = false;
+        var ske12Array = ["1","2","3","4","5"];
+        var ske13Array =["01","02","03","04","05"];
+        var ske12 = {
+            code: ske12Array,
+        };
+        var ske13 = {
+            name: ske13Array,
+        }
+        var ske13Choosed = {
+            
+        };
+        var setSke13Card = function(){
+            for(var i =1;i<=3;i++){
+                if(ske13Array.length==0){
+                    $("#card-back-"+i).text("END");
+                }
+                else if(ske13Array.length<3){
+                    $("#card-back-"+i).text(ske13Array[(i-1)%ske13Array.length]);
+                }
+                else{
+                    $("#card-back-"+i).text(ske13Array[i-1]);
+                }
+                
+            }
+        };
+        var setSke12Card = function(){
+            for(var i =1;i<=3;i++){
+                if(ske12Array.length==0){
+                    $("#card-back-"+i).text("END");
+                }
+                else if(ske12Array.length<3){
+                    $("#card-back-"+i).text(ske12Array[(i-1)%ske12Array.length]);
+                }
+                else{
+                    $("#card-back-"+i).text(ske12Array[i-1]);
+                }
+            }
+        };
+        var shuffleSke12 = function(){
+            shuffle(ske12Array);
+        };
+        var shuffleSke13 = function(){
+            shuffle(ske13Array);
+        };
+        var saveToFile = function(){
+            localStorage.setItem('choosed', JSON.stringify(ske13Choosed));
+            
+        };
+        var setClickListener = function(selector){
+            var tempDiv = $(selector);
+            tempDiv.bind("click", function(){
+                tempDiv.addClass("flip");
+                
+//                console.log();
+                var text = tempDiv.children().children(".back").text();
+                if(state == SKE12){
+                    currentSke13 =text;
+                    console.log(ske13Array);
+                    console.log(ske13Array.indexOf(text));
+                    ske13Array.splice(ske13Array.indexOf(text),1);
+                    console.log(ske13Array);
+                }
+                if(state == SKE13){
+                    ske13Choosed[currentSke13] = text;
+                    ske12Array.splice(ske12Array.indexOf(text),1);
+                    console.log(ske13Choosed);
+                    saveToFile();
+                }
+                unbindAll();
+                choosed = true;
+            });
+        };
+        var unbindAll = function(){
+                for(var i = 1;i<=3;i++){
+                    $("#card-container-"+i).unbind("click");
+                }
+        };
+        var resetCss = function(){
+            for(var i=1;i<=3;i++){
+                $("#card-container-"+i).removeClass("flip");
+            }
+        };
+        var resetClick = function(){
+            for (var i = 1; i <= 3; i++) {
+                setClickListener("#card-container-" + i);
+            }
+        };
+        $("#button").bind("click",function(){
+            if(choosed){
+                resetCss();
+                resetClick();
+                setTimeout(function(){
+                    if(state == SKE12){
+                        console.log("in ske12");
+                        shuffleSke12();
+                        setSke12Card();
+                    }
+                    else{
+                        console.log("in ske13");
+                        shuffleSke13();
+                        setSke13Card();
+                }
+                state == SKE12 ? state = SKE13 : state = SKE12;
+                }, 500);
+                console.log(state);
+                choosed = false;
+            }
+           
+        });
+        $(document).ready(function() {
+            shuffleSke12();
+            shuffleSke13();
+            resetCss();
+            resetClick();
+            setSke13Card();
+        });
+    </script>
+</body>
+</html>
