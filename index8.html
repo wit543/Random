@@ -149,12 +149,12 @@
                     <div id="card-flipper-3" class="flipper">
                         <div id="card-front-3" class="front">
                             <!--front content -->
-                        C
-                      </div>
-                      <div id="card-back-3" class="back">
-                        <!-- back content -->
-                        CC
-                      </div>
+                            C
+                        </div>
+                        <div id="card-back-3" class="back">
+                            <!-- back content -->
+                            CC
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
             var tempDiv = $(selector);
             tempDiv.bind("click", function() {
                 for (var i = 1; i <= 3; i++) {
-                    $("#card-back-"+i).css("background-color", backgroundColor[Math.floor(Math.random() * 19 + 1)]);
+                    $("#card-back-" + i).css("background-color", backgroundColor[Math.floor(Math.random() * 19 + 1)]);
                 }
                 tempDiv.addClass("flip");
                 tempDiv.addClass("scale");
@@ -265,7 +265,7 @@
                 }
                 for(var i = 1;i<=3;i++){
                     if(i!=tempDiv.selector.substring(16)){
-                        $("#card-container-"+i).unbind("mouseenter");
+                        $("#card-container-" + i).unbind("mouseenter");
                         console.log(i);
                     }
                    
@@ -309,7 +309,7 @@
         $("#show").bind("click", function() {
             if (choosed) {
                 for (var i = 1; i <= 3; i++) {
-                  $("#card-container-"+i).addClass("flip");
+                  $("#card-container-" + i).addClass("flip");
                 }
             }
         });
