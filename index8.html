@@ -17,12 +17,12 @@
         }
         .flip .flipper {
             transform: rotateY(180deg);
-            transition: 5s;
+            transition: 6s;
             transform-style: preserve-3d;
 /*            float: inherit;*/
         }
         .scale {
-            transform: scale(1.1);
+            transform: scale(1.02);
             transition-duration: 1s;
         }
         body {
@@ -32,6 +32,7 @@
         }
         .container {
             box-shadow: 0px 0px 25px #111111;
+/*            padding-bottom: 4%;*/
             margin-top: 30px;
             border-radius: 5px;
             background-color: whitesmoke;
@@ -43,52 +44,72 @@
         .flip-container {
 /*            perspective: 1000;*/
             position: relative;
-            background-color: aqua;        }
+        }
         /* flip the pane when hovered */
         /*.flip-container:active  .flipper{
             transform: rotateY(180deg);
         }*/
 /*
         .flip-container:hover{
-            transform: scale(1.1);
+            transform: scale(1.02);
             transition-duration: 1s;
         }
 */
         .flip-container, flipper, .front, .back {
             width: 100%;
-            height: 300px;
+/*            margin-bottom: 100%;*/
+/*            height: 300px;*/
             border-radius: 8px;
         }
         /* flip speed goes here */
         .flipper {
             transition: 0.6s;
             transform-style: preserve-3d;
-            background-color: bisque;
             position: relative;
+            text-align: center;
         }
         /* hide back of pane during swap */
         .front, .back {
             backface-visibility: hidden;
-            text-align: center;
-            position: absolute;
-            top: 0;
-            left: 0;
+/*            text-align: center;*/
+/*
+            top: 150px;
+            left: 100px;
+*/
+            background-color: darkcyan;
+            box-shadow: 0px 0px 5px #777777;
+            border-radius: 8px;
+            padding-top: 66%;
+            padding-bottom: 66%;
+/*            margin-bottom: 66%;*/
         }
         /* front pane, placed above back */
         .front {
             z-index: 1;
             /* for firefox 31 */
+            position: absolute;
             transform: rotateY(0deg);
             background-color: #000;
-            font-size: 200px;
+            font-size: 50px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #card-front-1 {
+            background-image: url("images/background/card-1.png");
+        }
+        #card-front-2 {
+            background-image: url("images/background/card-2.png");
+        }
+        #card-front-3 {
+            background-image: url("images/background/card-3.png");
         }
         /* back, initially hidden pane */
         .back {
             z-index: 2;
             transform: rotateY(180deg);
             background-color: #F0F;
-            padding: 30%;
-            font-size: 100px;
+/*            padding: 30%;*/
+            font-size: 50px;
         }
         .black-text {
             color: #444444;
@@ -102,11 +123,11 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-6 col-lg-6">
                 <h1 class="black-text">PICK ONE</h1>
                 <h1 id="status" class="black-text">ske12</h1>
             </div>
-            <div id="buttonDiv" class="col-xs-6">
+            <div id="buttonDiv" class="col-xs-6 col-lg-6">
                 <button id="show" class="btn btn-primary">Show
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 </button>
@@ -121,7 +142,7 @@
                     <div id="card-flipper-1" class="flipper">
                         <div id="card-front-1" class="front">
                   			<!-- front content -->
-                  			A
+                  			<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
   		                </div>
   		                <div id="card-back-1" class="back">
   		                	<!-- back content -->
@@ -158,7 +179,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
@@ -195,7 +216,7 @@
         var choosed = false;
         var ske12Array = ["1", "2", "3", "4", "5"];
         var ske13Array = ["01", "02", "03", "04", "05"];
-        var backgroundColor = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "FF5722", "#795548", "#9E9E9E"];
+        var backgroundColor = ["#F44336", "#E91E63", "#9C27B0", "#673AB7", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548", "#9E9E9E"];
         var ske12 = {
             code: ske12Array,
         };
@@ -275,7 +296,7 @@
                 choosed = true;
             });
             tempDiv.bind("mouseenter",function(){
-                tempDiv.css("transform", "scale(1.1)");
+                tempDiv.css("transform", "scale(1.02)");
                 tempDiv.css("transition-duration", "1s");
             });
             tempDiv.bind("mouseleave",function(){
@@ -347,6 +368,7 @@
             resetClick();
             setSke13Card();
         });
+        
     </script>
 </body>
 </html>
