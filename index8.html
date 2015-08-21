@@ -37,6 +37,9 @@
             border-radius: 5px;
             background-color: whitesmoke;
         }
+        .title-row {
+            margin-top: 7px;
+        }
         .people-row {
             margin-bottom: 15px;
         }
@@ -118,21 +121,51 @@
             text-align: right;
             margin-top: 24px;
         }
+        .card-glyphicon {
+            transform: scale(1.25);
+        }
+/*
+        .subtitle-container {
+            position: relative;
+        }
+*/
+/*
+        .subtitle h2 {
+            font-size: 5px;
+        }
+*/
+        .title-text-holder {
+            display: inline;
+            font-size: 20px;
+        }
+        #status {
+            font-size: 50px;
+        }
+        #picking {
+            font-size: 10px;
+            margin-bottom: -16px;
+            margin-left: 2px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-xs-6 col-lg-6">
-                <h1 class="black-text">PICK ONE</h1>
-                <h1 id="status" class="black-text">ske12</h1>
+        <div class="title-row row">
+            <div class="title-container title black-text col-xs-8 col-lg-8">
+                <div id="picking" class="black-text">
+                    PICKING                    
+                </div>
+                <div id="status" class="title-text-holder">            SKE13
+                </div>
+                <div class="title-text-holder">
+                    CHOOSE ONE CARD
+                </div>
             </div>
-            <div id="buttonDiv" class="col-xs-6 col-lg-6">
-                <button id="show" class="btn btn-primary">Show
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            
+            <div id="buttonDiv" class="col-xs-4 col-lg-4">
+                <button id="show" class="btn btn-primary">SHOW<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 </button>
-                <button id="button" class="btn btn-primary">Confirm
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <button id="button" class="btn btn-primary">CONFIRM<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 </button>
             </div>
         </div>
@@ -142,7 +175,7 @@
                     <div id="card-flipper-1" class="flipper">
                         <div id="card-front-1" class="front">
                   			<!-- front content -->
-                  			<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                  			<span class="glyphicon card-glyphicon glyphicon-user" aria-hidden="true"></span>
   		                </div>
   		                <div id="card-back-1" class="back">
   		                	<!-- back content -->
@@ -156,7 +189,7 @@
                     <div id="card-flipper-2" class="flipper">
                         <div id="card-front-2" class="front">
                   			<!-- front content -->
-                  			B
+                  			<span class="glyphicon card-glyphicon glyphicon-user" aria-hidden="true"></span>
   		                </div>
   		                <div id="card-back-2" class="back">
   		                	<!-- back content -->
@@ -170,7 +203,7 @@
                     <div id="card-flipper-3" class="flipper">
                         <div id="card-front-3" class="front">
                             <!--front content -->
-                            C
+                            <span class="glyphicon card-glyphicon glyphicon-user" aria-hidden="true"></span>
                         </div>
                         <div id="card-back-3" class="back">
                             <!-- back content -->
@@ -354,10 +387,10 @@
                 console.log(state);
                 choosed = false;
                 if (state == SKE12) {
-                    $("#status").text("ske13");
+                    $("#status").text("SKE12 ");
                 }
                 else {
-                    $("#status").text("ske12");
+                    $("#status").text("SKE13 ");
                 }
             }
         });
